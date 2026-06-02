@@ -19,6 +19,24 @@
       "imageHint": "solar energy"
     },
     {
+      "id": "solar-tech",
+      "description": "Solar equipment and technology",
+      "imageUrl": "https://picsum.photos/seed/tech1/1000/600",
+      "imageHint": "solar technology"
+    },
+    {
+      "id": "solar-blueprint",
+      "description": "Blueprint and planning for solar installation",
+      "imageUrl": "https://picsum.photos/seed/blue1/1000/600",
+      "imageHint": "solar planning"
+    },
+    {
+      "id": "solar-install-closeup",
+      "description": "Close up of solar panel installation",
+      "imageUrl": "https://picsum.photos/seed/install1/1000/600",
+      "imageHint": "solar panels"
+    },
+    {
       "id": "testimonial-carlos",
       "description": "WhatsApp testimonial from Carlos",
       "imageUrl": "https://picsum.photos/seed/test1/400/600",
