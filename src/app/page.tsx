@@ -51,46 +51,58 @@ export default function Home() {
         backgroundColor: "#0A0A0A", 
         backgroundImage: "radial-gradient(ellipse at top right, rgba(255,107,0,0.12), transparent 55%)" 
       }}>
-        <div className="mx-auto grid max-w-6xl gap-10 px-5 py-14 sm:py-20 md:grid-cols-2 md:items-center">
-          <div className="fade-in-up">
-            <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black leading-[1.05] tracking-tight text-white">
-              Aprenda Energia Solar do Zero e Entenda Como Funciona um dos{" "}
-              <span style={{ color: "#FF6B00" }}>Mercados que Mais Crescem</span> no Brasil
-            </h1>
-            <p className="mt-6 text-lg sm:text-xl text-gray-300 leading-relaxed max-w-xl">
-              Aprenda a dimensionar, entender e instalar sistemas fotovoltaicos através de um guia prático e organizado, mesmo que você nunca tenha trabalhado com energia solar antes.
-            </p>
-            <div className="mt-8 space-y-3">
-              {[
-                "Passo a passo simplificado",
-                "On-grid, Off-grid e Híbrido",
-                "Instalação completa",
-                "Cálculos sem complicação",
-                "Acesso imediato"
-              ].map((item, i) => (
-                <div key={i} className="flex items-center gap-2 text-white/90 font-medium">
-                  <CircleCheck className="h-5 w-5 text-primary" />
-                  <span>{item}</span>
-                </div>
-              ))}
+        <div className="mx-auto max-w-6xl px-5 py-14 sm:py-20">
+          <div className="grid gap-10 md:grid-cols-2 md:items-center">
+            <div className="fade-in-up">
+              <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black leading-[1.05] tracking-tight text-white">
+                Aprenda Energia Solar do Zero e Entenda Como Funciona um dos{" "}
+                <span style={{ color: "#FF6B00" }}>Mercados que Mais Crescem</span> no Brasil
+              </h1>
+              <p className="mt-6 text-lg sm:text-xl text-gray-300 leading-relaxed max-w-xl">
+                Aprenda a dimensionar, entender e instalar sistemas fotovoltaicos através de um guia prático e organizado, mesmo que você nunca tenha trabalhado com energia solar antes.
+              </p>
+              
+              <div className="mt-10">
+                <a href="#oferta" className="inline-flex items-center justify-center gap-2 rounded-xl px-6 sm:px-10 py-5 text-base sm:text-xl font-extrabold text-white text-center uppercase tracking-wide transition-all duration-200 hover:scale-[1.03] hover:-translate-y-0.5 active:scale-100 w-full sm:w-auto cta-pulse" style={{ backgroundColor: "#FF6B00", boxShadow: "0 10px 30px -5px rgba(255, 107, 0, 0.5)" }}>
+                  ⚡ QUERO ENTRAR NO MERCADO SOLAR — R$19,90
+                </a>
+              </div>
             </div>
-            <div className="mt-10">
-              <a href="#oferta" className="inline-flex items-center justify-center gap-2 rounded-xl px-6 sm:px-10 py-5 text-base sm:text-xl font-extrabold text-white text-center uppercase tracking-wide transition-all duration-200 hover:scale-[1.03] hover:-translate-y-0.5 active:scale-100 w-full sm:w-auto cta-pulse" style={{ backgroundColor: "#FF6B00", boxShadow: "0 10px 30px -5px rgba(255, 107, 0, 0.5)" }}>
-                ⚡ QUERO ENTRAR NO MERCADO SOLAR — R$19,90
-              </a>
+            
+            <div className="fade-in-up">
+              <div className="relative">
+                <div className="absolute -inset-4 rounded-3xl opacity-20 blur-2xl" style={{ backgroundColor: "#FF6B00" }}></div>
+                <Image 
+                  src={getImg('hero-solar')?.imageUrl || ""} 
+                  alt="Instalador profissional" 
+                  width={1000} 
+                  height={800}
+                  className="relative h-72 w-full rounded-2xl object-cover sm:h-96 md:h-[32rem]"
+                  data-ai-hint="solar installer"
+                />
+              </div>
             </div>
           </div>
-          <div className="fade-in-up">
-            <div className="relative">
-              <div className="absolute -inset-4 rounded-3xl opacity-20 blur-2xl" style={{ backgroundColor: "#FF6B00" }}></div>
-              <Image 
-                src={getImg('hero-solar')?.imageUrl || ""} 
-                alt="Instalador profissional" 
-                width={1000} 
-                height={800}
-                className="relative h-72 w-full rounded-2xl object-cover sm:h-96 md:h-[32rem]"
-                data-ai-hint="solar installer"
-              />
+
+          {/* Nova Seção de Cards Técnicos (Grade de Benefícios) */}
+          <div className="mt-16 w-full fade-in-up">
+            <div className="flex flex-wrap justify-center gap-4 lg:gap-6">
+              {[
+                { title: "Passo a Passo Simples", sub: "Metodologia prática e aplicável" },
+                { title: "Cálculos Claros", sub: "Dimensionamento sem complicação" },
+                { title: "Todos os Sistemas", sub: "On-grid, Off-grid e Híbrido" },
+                { title: "Instalação Completa", sub: "Equipamentos, estruturas e segurança" },
+                { title: "Uso Versátil", sub: "Para trabalho ou uso próprio" }
+              ].map((card, i) => (
+                <div
+                  key={i}
+                  className="flex w-full flex-col items-center justify-center rounded-sm border border-white/10 bg-[#121212] p-8 text-center transition-all hover:bg-[#1A1A1A] hover:border-white/20 sm:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.5rem)]"
+                  style={{ borderLeft: "4px solid #FF6B00" }}
+                >
+                  <h3 className="text-xl font-black text-white sm:text-2xl tracking-tight">{card.title}</h3>
+                  <p className="mt-2 text-sm sm:text-base font-medium text-gray-400 uppercase tracking-wide">{card.sub}</p>
+                </div>
+              ))}
             </div>
           </div>
         </div>
@@ -195,7 +207,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* BLOCO 4: Pain Points (Mover para cá) */}
+      {/* BLOCO 4: Pain Points */}
       <section className="bg-white py-20 border-t border-gray-100">
         <div className="mx-auto max-w-4xl px-5">
           <div className="fade-in-up">
@@ -226,7 +238,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* BLOCO 5: O Que Você Vai Aprender (Modules) */}
+      {/* BLOCO 5: O Que Você Vai Aprender */}
       <section id="conteudo" className="py-20" style={{ backgroundColor: "#111111" }}>
         <div className="mx-auto max-w-6xl px-5">
           <div className="fade-in-up text-center mb-16">
@@ -304,7 +316,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* BLOCO 7: Como Funciona na Prática (Timeline) */}
+      {/* BLOCO 7: Como Funciona na Prática */}
       <section className="py-20" style={{ backgroundColor: "#0A0A0A" }}>
         <div className="mx-auto max-w-4xl px-5">
           <div className="fade-in-up text-center mb-16">
@@ -339,7 +351,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* BLOCO 8: Comparação Refatorada */}
+      {/* BLOCO 8: Comparação */}
       <section className="bg-white py-20">
         <div className="mx-auto max-w-5xl px-5">
           <div className="fade-in-up text-center mb-12">
@@ -383,7 +395,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ROI Tool Tool (Maintain but it's internal) */}
+      {/* ROI Tool */}
       <section className="py-20" style={{ backgroundColor: "#0A0A0A" }}>
         <RoiCalculator />
       </section>
@@ -463,7 +475,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* BLOCO 11: ALTERAR BLOCO DE OFERTA */}
+      {/* BLOCO 11: BLOCO DE OFERTA */}
       <section id="oferta" className="py-20" style={{ backgroundColor: "#FF6B00" }}>
         <div className="mx-auto max-w-3xl px-5">
           <div className="fade-in-up">
