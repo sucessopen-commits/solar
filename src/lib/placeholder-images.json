@@ -1,3 +1,40 @@
 {
-  "placeholderImages": []
+  "placeholderImages": [
+    {
+      "id": "hero-solar",
+      "description": "Professional solar installer working on a roof",
+      "imageUrl": "https://picsum.photos/seed/solar1/1000/800",
+      "imageHint": "solar installer"
+    },
+    {
+      "id": "house-solar",
+      "description": "Modern residential house with solar panels",
+      "imageUrl": "https://picsum.photos/seed/solar2/1000/600",
+      "imageHint": "solar house"
+    },
+    {
+      "id": "solar-field",
+      "description": "Wide field of solar panels at sunset",
+      "imageUrl": "https://picsum.photos/seed/solar3/1600/900",
+      "imageHint": "solar energy"
+    },
+    {
+      "id": "testimonial-carlos",
+      "description": "WhatsApp testimonial from Carlos",
+      "imageUrl": "https://picsum.photos/seed/test1/400/600",
+      "imageHint": "whatsapp chat"
+    },
+    {
+      "id": "testimonial-rafael",
+      "description": "WhatsApp testimonial from Rafael",
+      "imageUrl": "https://picsum.photos/seed/test2/400/600",
+      "imageHint": "whatsapp chat"
+    },
+    {
+      "id": "testimonial-priscila",
+      "description": "WhatsApp testimonial from Priscila",
+      "imageUrl": "https://picsum.photos/seed/test3/400/600",
+      "imageHint": "whatsapp chat"
+    }
+  ]
 }
