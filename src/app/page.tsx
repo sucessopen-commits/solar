@@ -51,10 +51,11 @@ export default function Home() {
         backgroundColor: "#0A0A0A", 
         backgroundImage: "radial-gradient(ellipse at top right, rgba(255,107,0,0.12), transparent 55%)" 
       }}>
-        <div className="mx-auto max-w-6xl px-5 py-14 sm:py-20">
-          <div className="grid gap-10 md:grid-cols-2 md:items-center">
-            <div className="fade-in-up">
-              <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black leading-[1.05] tracking-tight text-white">
+        <div className="mx-auto max-w-6xl px-5 py-10 sm:py-20">
+          <div className="flex flex-col md:grid md:grid-cols-2 md:items-center gap-10">
+            {/* Texto e Conteúdo Principal */}
+            <div className="fade-in-up flex flex-col">
+              <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black leading-[1.1] tracking-tight text-white">
                 Aprenda Energia Solar do Zero e Entenda Como Funciona um dos{" "}
                 <span style={{ color: "#FF6B00" }}>Mercados que Mais Crescem</span> no Brasil
               </h1>
@@ -62,14 +63,30 @@ export default function Home() {
                 Aprenda a dimensionar, entender e instalar sistemas fotovoltaicos através de um guia prático e organizado, mesmo que você nunca tenha trabalhado com energia solar antes.
               </p>
               
-              <div className="mt-10">
+              {/* Imagem Mobile (Visível apenas entre P e CTA no mobile) */}
+              <div className="mt-8 md:hidden">
+                <div className="relative mx-auto max-w-[320px]">
+                  <div className="absolute -inset-2 rounded-2xl opacity-10 blur-xl" style={{ backgroundColor: "#FF6B00" }}></div>
+                  <Image 
+                    src={getImg('hero-solar')?.imageUrl || ""} 
+                    alt="Instalação Solar" 
+                    width={600} 
+                    height={400}
+                    className="relative rounded-xl object-cover shadow-2xl h-48 w-full"
+                    data-ai-hint="solar installation"
+                  />
+                </div>
+              </div>
+
+              <div className="mt-8 sm:mt-10">
                 <a href="#oferta" className="inline-flex items-center justify-center gap-2 rounded-xl px-6 sm:px-10 py-5 text-base sm:text-xl font-extrabold text-white text-center uppercase tracking-wide transition-all duration-200 hover:scale-[1.03] hover:-translate-y-0.5 active:scale-100 w-full sm:w-auto cta-pulse" style={{ backgroundColor: "#FF6B00", boxShadow: "0 10px 30px -5px rgba(255, 107, 0, 0.5)" }}>
                   ⚡ QUERO ENTRAR NO MERCADO SOLAR — R$19,90
                 </a>
               </div>
             </div>
             
-            <div className="fade-in-up">
+            {/* Imagem Desktop (Visível apenas em telas médias/grandes) */}
+            <div className="hidden md:block fade-in-up">
               <div className="relative">
                 <div className="absolute -inset-4 rounded-3xl opacity-20 blur-2xl" style={{ backgroundColor: "#FF6B00" }}></div>
                 <Image 
@@ -84,7 +101,7 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Nova Seção de Cards Técnicos (Grade de Benefícios) */}
+          {/* Cards Técnicos de Benefícios */}
           <div className="mt-16 w-full fade-in-up">
             <div className="flex flex-wrap justify-center gap-4 lg:gap-6">
               {[
@@ -141,42 +158,79 @@ export default function Home() {
         </div>
       </section>
 
-      {/* BLOCO 2: Por que entrar no mercado solar? */}
-      <section className="py-20 bg-white">
+      {/* BLOCO 2: Por Que o Mercado Solar Tem Chamado a Atenção de Tantos Profissionais? */}
+      <section className="py-24" style={{ backgroundColor: "#0A0A0A" }}>
         <div className="mx-auto max-w-6xl px-5">
-          <div className="fade-in-up text-center">
-            <h2 className="text-3xl sm:text-4xl font-black text-black leading-tight">
-              Por Que Tanta Gente Está Entrando no Mercado Solar?
+          <div className="fade-in-up text-center mb-16">
+            <h2 className="text-3xl sm:text-4xl font-black text-white leading-tight">
+              Por Que o Mercado Solar Tem Chamado a Atenção de Tantos Profissionais?
             </h2>
+            <p className="mt-4 text-gray-400 text-lg max-w-2xl mx-auto">
+              Um setor em crescimento, com demanda prática e espaço para quem busca desenvolver uma habilidade técnica valorizada.
+            </p>
           </div>
-          <div className="mt-12 grid gap-6 md:grid-cols-3">
-            {[
-              { 
-                icon: BarChart3, 
-                title: "Mercado em expansão", 
-                desc: "Diferente de setores estagnados, o mercado solar quebra recordes todos os anos no Brasil." 
-              },
-              { 
-                icon: GraduationCap, 
-                title: "Aprendizado acessível", 
-                desc: "Você não precisa de 5 anos de faculdade para entender como montar e dimensionar um sistema." 
-              },
-              { 
-                icon: CheckCircle2, 
-                title: "Serviços valorizados", 
-                desc: "Pela falta de mão de obra qualificada, quem sabe instalar tem uma habilidade rara e bem paga." 
-              }
-            ].map((card, i) => (
-              <div key={i} className="fade-in-up">
-                <div className="rounded-2xl bg-gray-50 border border-gray-100 p-8 shadow-sm h-full flex flex-col items-center text-center">
-                  <div className="p-3 rounded-xl bg-primary/10 mb-5">
-                    <card.icon className="h-10 w-10 text-primary" />
+
+          <div className="flex flex-col md:grid md:grid-cols-3 gap-8 items-center">
+            {/* Coluna Esquerda */}
+            <div className="flex flex-col gap-8 order-2 md:order-1">
+              <div className="p-8 rounded-2xl bg-[#121212] border border-white/5 hover:border-primary/30 transition-all group">
+                <div className="h-1 w-12 bg-primary mb-6 transition-all group-hover:w-20"></div>
+                <h3 className="text-xl font-bold text-white mb-3">Mercado em Expansão</h3>
+                <p className="text-gray-400 leading-relaxed text-sm">
+                  O setor de energia solar segue crescendo no Brasil, abrindo espaço para profissionais que entendem instalação, dimensionamento e aplicação prática dos sistemas.
+                </p>
+              </div>
+              <div className="p-8 rounded-2xl bg-[#121212] border border-white/5 hover:border-primary/30 transition-all group">
+                <div className="h-1 w-12 bg-primary mb-6 transition-all group-hover:w-20"></div>
+                <h3 className="text-xl font-bold text-white mb-3">Aplicação em Diferentes Cenários</h3>
+                <p className="text-gray-400 leading-relaxed text-sm">
+                  O conhecimento pode ser aplicado em sistemas on-grid, off-grid e híbridos, tanto em projetos residenciais quanto em demandas comerciais.
+                </p>
+              </div>
+            </div>
+
+            {/* Coluna Central - Imagem */}
+            <div className="order-1 md:order-2 flex justify-center">
+              <div className="relative group p-1">
+                <div className="absolute -inset-1 bg-primary/20 rounded-3xl blur-xl group-hover:bg-primary/40 transition-all duration-500"></div>
+                <div className="relative bg-[#1A1A1A] p-2 rounded-2xl border border-white/10">
+                  <Image 
+                    src={getImg('solar-tech')?.imageUrl || ""} 
+                    alt="Tecnologia Solar" 
+                    width={400} 
+                    height={500}
+                    className="rounded-xl object-cover h-[350px] md:h-[450px] w-full"
+                    data-ai-hint="solar technology"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent rounded-xl flex items-end p-6">
+                    <div className="flex items-center gap-3">
+                      <div className="p-2 bg-primary rounded-lg">
+                        <Zap className="h-5 w-5 text-white" />
+                      </div>
+                      <span className="text-white font-black text-xs uppercase tracking-widest">Habilidade Prática</span>
+                    </div>
                   </div>
-                  <h3 className="text-xl font-bold text-black mb-3">{card.title}</h3>
-                  <p className="text-gray-600 leading-relaxed">{card.desc}</p>
                 </div>
               </div>
-            ))}
+            </div>
+
+            {/* Coluna Direita */}
+            <div className="flex flex-col gap-8 order-3 md:order-3">
+              <div className="p-8 rounded-2xl bg-[#121212] border border-white/5 hover:border-primary/30 transition-all group">
+                <div className="h-1 w-12 bg-primary mb-6 transition-all group-hover:w-20"></div>
+                <h3 className="text-xl font-bold text-white mb-3">Habilidade Técnica Valorizada</h3>
+                <p className="text-gray-400 leading-relaxed text-sm">
+                  Saber interpretar equipamentos, estruturas, cálculos e etapas de instalação torna o profissional mais preparado para atuar em projetos reais.
+                </p>
+              </div>
+              <div className="p-8 rounded-2xl bg-[#121212] border border-white/5 hover:border-primary/30 transition-all group">
+                <div className="h-1 w-12 bg-primary mb-6 transition-all group-hover:w-20"></div>
+                <h3 className="text-xl font-bold text-white mb-3">Mais Segurança para Atuar</h3>
+                <p className="text-gray-400 leading-relaxed text-sm">
+                  Um passo a passo claro ajuda a reduzir dúvidas, evitar improvisos e entender melhor o processo completo de uma instalação fotovoltaica.
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </section>
