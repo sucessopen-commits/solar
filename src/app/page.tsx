@@ -1,4 +1,7 @@
+"use client";
+
 import Image from "next/image";
+import { useState, useEffect } from "react";
 import { 
   Lock, 
   Zap, 
@@ -31,11 +34,25 @@ import {
 } from "lucide-react";
 import { RoiCalculator } from "@/components/roi-calculator";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
+import { Carousel, CarouselContent, CarouselItem, CarouselApi } from "@/components/ui/carousel";
 import { PlaceHolderImages } from "@/lib/placeholder-images";
+import { cn } from "@/lib/utils";
 
 export default function Home() {
   const getImg = (id: string) => PlaceHolderImages.find(img => img.id === id);
+
+  const [api, setApi] = useState<CarouselApi>();
+  const [current, setCurrent] = useState(0);
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    if (!api) return;
+    setCount(api.scrollSnapList().length);
+    setCurrent(api.selectedScrollSnap());
+    api.on("select", () => {
+      setCurrent(api.selectedScrollSnap());
+    });
+  }, [api]);
 
   const comparisonData = [
     { label: "Conteúdo organizado e estruturado", v1: true, v2: true, v3: false },
@@ -89,7 +106,7 @@ export default function Home() {
 
               <div className="mt-8 sm:mt-10">
                 <a href="#oferta" className="inline-flex items-center justify-center gap-2 rounded-xl px-6 sm:px-10 py-5 text-base sm:text-xl font-extrabold text-white text-center uppercase tracking-wide transition-all duration-200 hover:scale-[1.03] hover:-translate-y-0.5 active:scale-100 w-full sm:w-auto cta-pulse" style={{ backgroundColor: "#FF6B00", boxShadow: "0 10px 30px -5px rgba(255, 107, 0, 0.5)" }}>
-                  ⚡ QUERO ENTRAR NO MERCADO SOLAR — R$19,90
+                  QUERO COMEÇAR AGORA
                 </a>
               </div>
             </div>
@@ -314,7 +331,7 @@ export default function Home() {
             {[
               { id: "01", icon: Sun, title: "Fundamentos do Sistema Solar", desc: "A base técnica: como a energia é captada e convertida em eletricidade." },
               { id: "02", icon: BarChart3, title: "Cálculos e Dimensionamento", desc: "Como calcular exatamente o que o cliente precisa, sem margem para erro." },
-              { id: "03", icon: Radio, title: "Tipos de Sistema", desc: "As diferenças e aplicações de sistemas On-grid, Off-grid e Híbridos." },
+              { id: "03", icon: Radio, title: "Tipos de Sistema", desc: "As diferenças e aplicações de sistemas On-grid, Off-grid e Híbrido." },
               { id: "04", icon: Briefcase, title: "Equipamentos Essenciais", desc: "Painéis, inversores e proteções: aprenda a escolher o hardware certo." },
               { id: "05", icon: Hammer, title: "Estruturas e Fixação", desc: "Técnicas profissionais de montagem para todos os tipos de telhados e solos." },
               { id: "06", icon: Wrench, title: "Instalação Passo a Passo", desc: "A sequência lógica da obra, do primeiro painel à entrega final do sistema." }
@@ -485,15 +502,12 @@ export default function Home() {
       <section className="py-24" style={{ backgroundColor: "#F9F9F9" }}>
         <div className="mx-auto max-w-6xl px-5">
           <div className="fade-in-up text-center mb-16">
-            <span className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-xs font-black uppercase tracking-wider text-white bg-green-500 mb-4">
-              <MessageCircle className="h-4 w-4" /> Relatos de Alunos
-            </span>
             <h2 className="text-3xl sm:text-5xl font-black text-black leading-tight">
               Quem Aplicou Já Está <span className="text-primary">Colhendo Resultado</span>
             </h2>
           </div>
           
-          <Carousel className="w-full" opts={{ align: "start", loop: true }}>
+          <Carousel setApi={setApi} className="w-full" opts={{ align: "start", loop: true }}>
             <CarouselContent>
               {[
                 { name: "Carlos M.", sub: "Eletricista", img: 'testimonial-carlos', text: "O guia me ajudou a entender a lógica por trás da instalação. Hoje faço serviços solares com muito mais segurança." },
@@ -527,13 +541,20 @@ export default function Home() {
                 </CarouselItem>
               ))}
             </CarouselContent>
-            <div className="hidden md:block">
-              <CarouselPrevious className="-left-12 border-primary text-primary hover:bg-primary hover:text-white" />
-              <CarouselNext className="-right-12 border-primary text-primary hover:bg-primary hover:text-white" />
-            </div>
-            <div className="flex justify-center gap-2 mt-8 md:hidden">
-              <CarouselPrevious className="static translate-y-0 border-primary text-primary" />
-              <CarouselNext className="static translate-y-0 border-primary text-primary" />
+            
+            {/* Dots Indicadores */}
+            <div className="mt-8 flex justify-center gap-2">
+              {Array.from({ length: count }).map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => api?.scrollTo(index)}
+                  className={cn(
+                    "h-3 w-3 rounded-full transition-all duration-300",
+                    current === index ? "bg-primary w-8" : "bg-gray-300"
+                  )}
+                  aria-label={`Ir para depoimento ${index + 1}`}
+                />
+              ))}
             </div>
           </Carousel>
         </div>
@@ -586,11 +607,11 @@ export default function Home() {
                   "Guia de Tipos de Sistemas (On/Off/Híbrido)",
                   "Manual de Equipamentos e Tecnologia",
                   "Técnicas de Estruturas e Fixação",
-                  "Checklist de Instalação Profissional",
-                  "Bônus: Guia de Limpeza de Painéis",
-                  "Bônus: Contratos de Manutenção",
                   "Acesso Vitalício ao Conteúdo",
-                  "Garantia Incondicional de 7 Dias"
+                  "Garantia Incondicional de 7 Dias",
+                  "🎁 Bônus: Checklist de Instalação Profissional",
+                  "🎁 Bônus: Guia de Limpeza de Painéis",
+                  "🎁 Bônus: Contratos de Manutenção"
                 ].map((item, i) => (
                   <div key={i} className="flex items-center gap-3 py-2 border-b border-gray-50 last:border-0">
                     <CircleCheck className="h-5 w-5 flex-shrink-0 text-green-600" />
@@ -605,13 +626,8 @@ export default function Home() {
               </div>
               <div className="mt-8">
                 <a href="https://pay.kiwify.com.br/FyBJS48" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 rounded-2xl px-6 sm:px-10 py-6 text-lg sm:text-2xl font-black text-white text-center uppercase tracking-wide transition-all duration-200 hover:scale-[1.02] hover:-translate-y-1 active:scale-100 cta-pulse w-full shadow-xl" style={{ backgroundColor: "#FF6B00" }}>
-                  🔥 QUERO COMEÇAR HOJE — R$19,90
+                  QUERO COMEÇAR AGORA
                 </a>
-              </div>
-              <div className="mt-6 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs font-bold text-gray-400">
-                <span className="flex items-center gap-1.5"><Lock className="h-4 w-4" /> COMPRA SEGURA</span>
-                <span className="flex items-center gap-1.5"><ShieldCheck className="h-4 w-4" /> 7 DIAS DE GARANTIA</span>
-                <span className="flex items-center gap-1.5"><Zap className="h-4 w-4" /> ACESSO VIA E-MAIL</span>
               </div>
             </div>
           </div>
@@ -675,7 +691,7 @@ export default function Home() {
             </div>
             <div className="mt-12">
               <a href="#oferta" className="inline-flex items-center justify-center gap-2 rounded-2xl px-8 sm:px-14 py-7 text-xl sm:text-2xl font-extrabold text-white text-center uppercase tracking-wide transition-all duration-200 hover:scale-[1.03] hover:-translate-y-1 active:scale-100 cta-pulse w-full sm:w-auto shadow-[0_15px_40px_-10px_rgba(255,107,0,0.6)]" style={{ backgroundColor: "#FF6B00" }}>
-                ⚡ QUERO COMEÇAR HOJE — R$19,90
+                QUERO COMEÇAR AGORA
               </a>
             </div>
             <div className="mt-8 flex items-center justify-center gap-6 opacity-60">

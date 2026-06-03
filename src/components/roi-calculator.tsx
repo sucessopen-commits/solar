@@ -114,14 +114,14 @@ export function RoiCalculator() {
                   <p className="text-2xl font-black text-foreground">R$ {formatCurrency(estimatedCosts)}</p>
                 </div>
 
-                <div className="p-6 rounded-2xl bg-foreground text-background shadow-xl border border-white/10 ring-4 ring-primary/10">
+                <div className="p-6 rounded-2xl bg-[#0F1A14] text-white shadow-xl border border-green-500/20 ring-4 ring-green-500/5">
                   <div className="flex justify-between items-center mb-1">
-                    <p className="text-xs font-bold text-primary uppercase tracking-widest">Resultado Líquido Est.</p>
-                    <DollarSign className="h-5 w-5 text-primary" />
+                    <p className="text-xs font-bold text-green-500 uppercase tracking-widest">Resultado Líquido Est.</p>
+                    <DollarSign className="h-5 w-5 text-green-500" />
                   </div>
                   <p className="text-4xl font-black text-white">R$ {formatCurrency(netResult)}</p>
-                  <div className="mt-4 pt-4 border-t border-white/10">
-                    <p className="text-[10px] leading-tight text-white/50 font-medium italic">
+                  <div className="mt-4 pt-4 border-t border-green-500/10">
+                    <p className="text-[10px] leading-tight text-white/40 font-medium italic">
                       Estimativa meramente educativa. Os resultados reais dependem da região, demanda, execução, custos, experiência e capacidade comercial de cada profissional.
                     </p>
                   </div>
