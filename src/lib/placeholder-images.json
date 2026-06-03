@@ -37,6 +37,24 @@
       "imageHint": "solar panels"
     },
     {
+      "id": "solar-dimensionamento",
+      "description": "Simplified solar dimensioning screenshot",
+      "imageUrl": "https://i.postimg.cc/QCLDNtBs/Chat-GPT-Image-2-de-jun-de-2026-23-09-02.png",
+      "imageHint": "solar calculation"
+    },
+    {
+      "id": "solar-equipamentos",
+      "description": "Solar hardware and specialized tools",
+      "imageUrl": "https://i.postimg.cc/FztvFRfv/Chat-GPT-Image-2-de-jun-de-2026-23-09-06.png",
+      "imageHint": "solar components"
+    },
+    {
+      "id": "solar-pratica",
+      "description": "Professional solar installation in practice",
+      "imageUrl": "https://i.postimg.cc/gj9pcJwm/Chat-GPT-Image-2-de-jun-de-2026-23-09-09.png",
+      "imageHint": "solar installation"
+    },
+    {
       "id": "testimonial-carlos",
       "description": "WhatsApp testimonial from Carlos",
       "imageUrl": "https://picsum.photos/seed/test1/400/600",

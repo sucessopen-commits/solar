@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { 
   Lock, 
   Zap, 
@@ -54,6 +54,30 @@ export default function Home() {
     });
   }, [api]);
 
+  // Observer para animações suaves ao rolar a página
+  useEffect(() => {
+    const observerOptions = {
+      root: null,
+      rootMargin: '0px',
+      threshold: 0.1,
+    };
+
+    const handleIntersect = (entries: IntersectionObserverEntry[], observer: IntersectionObserver) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('fade-in-up');
+          observer.unobserve(entry.target);
+        }
+      });
+    };
+
+    const observer = new IntersectionObserver(handleIntersect, observerOptions);
+    const targets = document.querySelectorAll('.reveal');
+    targets.forEach((target) => observer.observe(target));
+
+    return () => observer.disconnect();
+  }, []);
+
   const comparisonData = [
     { label: "Conteúdo organizado e estruturado", v1: true, v2: true, v3: false },
     { label: "Foco em aplicação real", v1: true, v2: false, v3: false },
@@ -65,22 +89,15 @@ export default function Home() {
 
   return (
     <main className="min-h-screen font-body selection:bg-primary selection:text-white" style={{ backgroundColor: "#0A0A0A", color: "#fff" }}>
-      {/* Sticky Banner */}
-      <div className="sticky top-0 z-50 w-full text-black" style={{ backgroundColor: "#FF6B00" }}>
-        <div className="mx-auto flex max-w-6xl items-center justify-center gap-2 px-3 py-2 text-center text-xs sm:text-sm font-bold">
-          <span>⚡ OFERTA ESPECIAL — Acesso completo por apenas R$19,90</span>
-        </div>
-      </div>
-
       {/* Hero Section */}
-      <section className="relative overflow-hidden" style={{ 
+      <section className="relative overflow-hidden reveal" style={{ 
         backgroundColor: "#0A0A0A", 
         backgroundImage: "radial-gradient(ellipse at top right, rgba(255,107,0,0.12), transparent 55%)" 
       }}>
         <div className="mx-auto max-w-6xl px-5 py-10 sm:py-20">
           <div className="flex flex-col md:grid md:grid-cols-2 md:items-center gap-10">
             {/* Texto e Conteúdo Principal */}
-            <div className="fade-in-up flex flex-col">
+            <div className="flex flex-col">
               <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black leading-[1.1] tracking-tight text-white">
                 Venha ingressar em um dos{" "}
                 <span style={{ color: "#FF6B00" }}>mercados que mais crescem</span> no Brasil
@@ -112,7 +129,7 @@ export default function Home() {
             </div>
             
             {/* Imagem Desktop (Visível apenas em telas médias/grandes) */}
-            <div className="hidden md:block fade-in-up">
+            <div className="hidden md:block">
               <div className="relative">
                 <div className="absolute -inset-4 rounded-3xl opacity-20 blur-2xl" style={{ backgroundColor: "#FF6B00" }}></div>
                 <Image 
@@ -128,7 +145,7 @@ export default function Home() {
           </div>
 
           {/* Cards Técnicos de Benefícios */}
-          <div className="mt-16 w-full fade-in-up">
+          <div className="mt-16 w-full">
             <div className="flex flex-wrap justify-center gap-4 lg:gap-6">
               {[
                 { title: "Passo a Passo Simples", sub: "Metodologia prática e aplicável" },
@@ -152,9 +169,9 @@ export default function Home() {
       </section>
 
       {/* BLOCO 1: Um Mercado em Crescimento */}
-      <section className="py-20" style={{ backgroundColor: "#111111" }}>
+      <section className="py-20 reveal" style={{ backgroundColor: "#111111" }}>
         <div className="mx-auto max-w-6xl px-5">
-          <div className="fade-in-up text-center max-w-3xl mx-auto">
+          <div className="text-center max-w-3xl mx-auto">
             <h2 className="text-3xl sm:text-5xl font-black text-white leading-tight">
               Um Mercado em Crescimento. Uma Habilidade Cada Vez Mais Valorizada.
             </h2>
@@ -172,12 +189,10 @@ export default function Home() {
               { icon: DollarSign, val: "R$8k–R$25k", label: "Ticket por projeto" },
               { icon: Users, val: "Alta demanda", label: "Falta de profissionais" }
             ].map((stat, i) => (
-              <div key={i} className="fade-in-up">
-                <div className="h-full rounded-2xl border p-6 text-center transition-all bg-[#1A1A1A]" style={{ borderColor: "rgba(255,107,0,0.2)" }}>
-                  <stat.icon className="mx-auto h-10 w-10 text-primary" />
-                  <div className="mt-4 text-2xl sm:text-3xl font-black text-white">{stat.val}</div>
-                  <p className="mt-2 text-sm text-gray-400 font-medium">{stat.label}</p>
-                </div>
+              <div key={i} className="h-full rounded-2xl border p-6 text-center transition-all bg-[#1A1A1A]" style={{ borderColor: "rgba(255,107,0,0.2)" }}>
+                <stat.icon className="mx-auto h-10 w-10 text-primary" />
+                <div className="mt-4 text-2xl sm:text-3xl font-black text-white">{stat.val}</div>
+                <p className="mt-2 text-sm text-gray-400 font-medium">{stat.label}</p>
               </div>
             ))}
           </div>
@@ -185,9 +200,9 @@ export default function Home() {
       </section>
 
       {/* BLOCO 2: Por Que o Mercado Solar Tem Chamado a Atenção de Tantos Profissionais? */}
-      <section className="py-24" style={{ backgroundColor: "#0A0A0A" }}>
+      <section className="py-24 reveal" style={{ backgroundColor: "#0A0A0A" }}>
         <div className="mx-auto max-w-6xl px-5">
-          <div className="fade-in-up text-center mb-16">
+          <div className="text-center mb-16">
             <h2 className="text-3xl sm:text-4xl font-black text-white leading-tight">
               Por Que o Mercado Solar Tem Chamado a Atenção de Tantos Profissionais?
             </h2>
@@ -262,9 +277,9 @@ export default function Home() {
       </section>
 
       {/* BLOCO 3: Para Quem Este Guia Foi Criado */}
-      <section className="py-20" style={{ backgroundColor: "#0A0A0A" }}>
+      <section className="py-20 reveal" style={{ backgroundColor: "#0A0A0A" }}>
         <div className="mx-auto max-w-6xl px-5">
-          <div className="fade-in-up text-center mb-12">
+          <div className="text-center mb-12">
             <h2 className="text-3xl sm:text-4xl font-black text-white leading-tight">Para Quem Este Guia Foi Criado</h2>
           </div>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
@@ -275,12 +290,10 @@ export default function Home() {
               { icon: User, title: "Homem 35+", desc: "Quer construir uma nova fase profissional com conhecimento sólido." },
               { icon: UserPlus, title: "Iniciante", desc: "Nunca teve contato com energia solar, mas quer aprender do zero." }
             ].map((avatar, i) => (
-              <div key={i} className="fade-in-up">
-                <div className="h-full rounded-2xl border bg-white/5 p-6 border-white/10 hover:border-primary/50 transition-colors">
-                  <avatar.icon className="h-10 w-10 text-primary mb-4" />
-                  <h3 className="text-lg font-bold text-white mb-2">{avatar.title}</h3>
-                  <p className="text-sm text-gray-400 leading-relaxed">{avatar.desc}</p>
-                </div>
+              <div key={i} className="h-full rounded-2xl border bg-white/5 p-6 border-white/10 hover:border-primary/50 transition-colors">
+                <avatar.icon className="h-10 w-10 text-primary mb-4" />
+                <h3 className="text-lg font-bold text-white mb-2">{avatar.title}</h3>
+                <p className="text-sm text-gray-400 leading-relaxed">{avatar.desc}</p>
               </div>
             ))}
           </div>
@@ -288,9 +301,9 @@ export default function Home() {
       </section>
 
       {/* BLOCO 4: Pain Points */}
-      <section className="bg-white py-20 border-t border-gray-100">
+      <section className="bg-white py-20 border-t border-gray-100 reveal">
         <div className="mx-auto max-w-4xl px-5">
-          <div className="fade-in-up">
+          <div>
             <h2 className="text-center text-2xl sm:text-4xl font-black text-black leading-tight">Você quer trabalhar com energia solar, mas...</h2>
           </div>
           <div className="mt-12 space-y-4">
@@ -301,15 +314,13 @@ export default function Home() {
               "Não entende a parte comercial e técnica de uma instalação",
               "Tem medo da complexidade técnica dos sistemas atuais"
             ].map((text, i) => (
-              <div key={i} className="fade-in-up">
-                <div className="flex items-center gap-4 rounded-xl border border-gray-200 bg-gray-50 px-5 py-5 shadow-sm">
-                  <CircleX className="h-6 w-6 flex-shrink-0 text-red-600" />
-                  <span className="text-base sm:text-lg font-bold text-gray-800">{text}</span>
-                </div>
+              <div key={i} className="flex items-center gap-4 rounded-xl border border-gray-200 bg-gray-50 px-5 py-5 shadow-sm">
+                <CircleX className="h-6 w-6 flex-shrink-0 text-red-600" />
+                <span className="text-base sm:text-lg font-bold text-gray-800">{text}</span>
               </div>
             ))}
           </div>
-          <div className="fade-in-up">
+          <div>
             <div className="mt-12 border-t-2 border-primary/20 pt-10 text-center">
               <p className="text-xl sm:text-3xl font-black text-primary">O Guia do Instalador Solar foi feito para encurtar seu caminho.</p>
               <p className="mt-6 text-base sm:text-lg font-medium text-gray-600 leading-relaxed max-w-2xl mx-auto">Organizamos todo o conhecimento técnico e prático de forma simples, direta e sem a enrolação dos cursos tradicionais.</p>
@@ -319,9 +330,9 @@ export default function Home() {
       </section>
 
       {/* BLOCO 5: O Que Você Vai Aprender */}
-      <section id="conteudo" className="py-20" style={{ backgroundColor: "#111111" }}>
+      <section id="conteudo" className="py-20 reveal" style={{ backgroundColor: "#111111" }}>
         <div className="mx-auto max-w-6xl px-5">
-          <div className="fade-in-up text-center mb-16">
+          <div className="text-center mb-16">
             <h2 className="text-3xl sm:text-5xl font-black text-white leading-tight">
               O Que Você <span className="text-primary">Vai Aprender</span>
             </h2>
@@ -336,15 +347,13 @@ export default function Home() {
               { id: "05", icon: Hammer, title: "Estruturas e Fixação", desc: "Técnicas profissionais de montagem para todos os tipos de telhados e solos." },
               { id: "06", icon: Wrench, title: "Instalação Passo a Passo", desc: "A sequência lógica da obra, do primeiro painel à entrega final do sistema." }
             ].map((mod, i) => (
-              <div key={i} className="fade-in-up">
-                <div className="h-full rounded-2xl p-8 bg-[#1A1A1A] border-l-4 border-primary shadow-lg hover:bg-[#222] transition-all">
-                  <div className="flex justify-between items-start mb-4">
-                    <span className="text-sm font-bold text-primary uppercase tracking-widest">Módulo {mod.id}</span>
-                    <mod.icon className="h-6 w-6 text-primary/60" />
-                  </div>
-                  <h3 className="text-xl font-black text-white mb-3">{mod.title}</h3>
-                  <p className="text-gray-400 text-sm sm:text-base leading-relaxed">{mod.desc}</p>
+              <div key={i} className="h-full rounded-2xl p-8 bg-[#1A1A1A] border-l-4 border-primary shadow-lg hover:bg-[#222] transition-all">
+                <div className="flex justify-between items-start mb-4">
+                  <span className="text-sm font-bold text-primary uppercase tracking-widest">Módulo {mod.id}</span>
+                  <mod.icon className="h-6 w-6 text-primary/60" />
                 </div>
+                <h3 className="text-xl font-black text-white mb-3">{mod.title}</h3>
+                <p className="text-gray-400 text-sm sm:text-base leading-relaxed">{mod.desc}</p>
               </div>
             ))}
           </div>
@@ -352,9 +361,9 @@ export default function Home() {
       </section>
 
       {/* BLOCO 6: Aprenda Sem Complicação */}
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-white reveal">
         <div className="mx-auto max-w-6xl px-5">
-          <div className="fade-in-up text-center mb-16">
+          <div className="text-center mb-16">
             <h2 className="text-3xl sm:text-4xl font-black text-black leading-tight">Aprenda Sem Complicação</h2>
           </div>
           <div className="space-y-20">
@@ -362,21 +371,21 @@ export default function Home() {
               {
                 title: "Dimensionamento Simplificado",
                 desc: "Esqueça fórmulas matemáticas complexas que ninguém usa no dia a dia. Ensinamos o método prático para dimensionar sistemas que funcionam.",
-                img: "solar-blueprint"
+                img: "solar-dimensionamento"
               },
               {
                 title: "Equipamentos e Tecnologia",
                 desc: "Entenda a fundo como funcionam os painéis, inversores e sistemas de proteção. Saiba o que comprar e como configurar cada componente.",
-                img: "solar-tech"
+                img: "solar-equipamentos"
               },
               {
                 title: "Instalação na Prática",
                 desc: "Mostramos como é o dia a dia de uma instalação real. As melhores práticas de segurança e fixação para garantir um serviço impecável.",
-                img: "solar-install-closeup"
+                img: "solar-pratica"
               }
             ].map((item, i) => (
               <div key={i} className={`flex flex-col gap-10 md:items-center ${i % 2 !== 0 ? 'md:flex-row-reverse' : 'md:flex-row'}`}>
-                <div className="flex-1 fade-in-up">
+                <div className="flex-1">
                   <Image 
                     src={getImg(item.img)?.imageUrl || ""} 
                     alt={item.title} 
@@ -386,7 +395,7 @@ export default function Home() {
                     data-ai-hint="solar installation"
                   />
                 </div>
-                <div className="flex-1 fade-in-up">
+                <div className="flex-1">
                   <h3 className="text-2xl sm:text-3xl font-black text-black mb-4">{item.title}</h3>
                   <p className="text-lg text-gray-600 leading-relaxed">{item.desc}</p>
                 </div>
@@ -397,9 +406,9 @@ export default function Home() {
       </section>
 
       {/* BLOCO 7: Como Funciona na Prática */}
-      <section className="py-20" style={{ backgroundColor: "#0A0A0A" }}>
+      <section className="py-20 reveal" style={{ backgroundColor: "#0A0A0A" }}>
         <div className="mx-auto max-w-4xl px-5">
-          <div className="fade-in-up text-center mb-16">
+          <div className="text-center mb-16">
             <h2 className="text-3xl sm:text-4xl font-black text-white leading-tight">Como Funciona na Prática</h2>
             <p className="mt-4 text-gray-400">Siga o passo a passo lógico para dominar a instalação.</p>
           </div>
@@ -432,14 +441,14 @@ export default function Home() {
       </section>
 
       {/* BLOCO 8: Comparação */}
-      <section className="bg-white py-20">
+      <section className="bg-white py-20 reveal">
         <div className="mx-auto max-w-5xl px-5">
-          <div className="fade-in-up text-center mb-12">
+          <div className="text-center mb-12">
             <h2 className="text-3xl sm:text-4xl font-black text-black leading-tight">O Que Torna Este Guia Diferente</h2>
           </div>
           
           {/* Tabela Desktop */}
-          <div className="hidden sm:block fade-in-up overflow-x-auto rounded-3xl border border-gray-100 shadow-2xl">
+          <div className="hidden sm:block overflow-x-auto rounded-3xl border border-gray-100 shadow-2xl">
             <table className="w-full min-w-[550px] text-center border-collapse overflow-hidden">
               <thead>
                 <tr className="bg-gray-50 text-black">
@@ -494,14 +503,14 @@ export default function Home() {
       </section>
 
       {/* Simulador Tool */}
-      <section className="py-20" style={{ backgroundColor: "#0A0A0A" }}>
+      <section className="py-20 reveal" style={{ backgroundColor: "#0A0A0A" }}>
         <RoiCalculator />
       </section>
 
       {/* BLOCO 9: Testimonials */}
-      <section className="py-24" style={{ backgroundColor: "#F9F9F9" }}>
+      <section className="py-24 reveal" style={{ backgroundColor: "#F9F9F9" }}>
         <div className="mx-auto max-w-6xl px-5">
-          <div className="fade-in-up text-center mb-16">
+          <div className="text-center mb-16">
             <h2 className="text-3xl sm:text-5xl font-black text-black leading-tight">
               Quem Aplicou Já Está <span className="text-primary">Colhendo Resultado</span>
             </h2>
@@ -561,9 +570,9 @@ export default function Home() {
       </section>
 
       {/* BLOCO 10: Bonuses */}
-      <section className="py-20" style={{ backgroundColor: "#111111" }}>
+      <section className="py-20 reveal" style={{ backgroundColor: "#111111" }}>
         <div className="mx-auto max-w-6xl px-5 text-center">
-          <div className="fade-in-up mb-12">
+          <div className="mb-12">
             <span className="inline-block rounded-full px-4 py-1.5 text-xs font-black uppercase tracking-wider text-black bg-primary mb-5">Exclusivo para quem começar hoje</span>
             <h2 className="text-3xl sm:text-4xl font-black text-white leading-tight">Você também recebe esses bônus práticos:</h2>
           </div>
@@ -573,7 +582,7 @@ export default function Home() {
               { id: 2, title: "Contratos de Manutenção Solar", desc: "Como estruturar contratos fixos mensais com seus clientes para garantir estabilidade.", price: "R$19,90" },
               { id: 3, title: "Checklist do Instalador", desc: "Uma lista completa de verificação para não esquecer nenhum detalhe técnico em campo.", price: "R$39,00" }
             ].map((b, i) => (
-              <div key={i} className="fade-in-up">
+              <div key={i}>
                 <div className="flex h-full flex-col rounded-3xl border-2 p-8 transition-all hover:border-primary/40 bg-[#1A1A1A]" style={{ borderColor: "rgba(255,107,0,0.2)" }}>
                   <Gift className="h-12 w-12 text-primary mb-6" />
                   <div className="text-xs font-black tracking-widest text-primary uppercase mb-2">BÔNUS {b.id}</div>
@@ -591,9 +600,9 @@ export default function Home() {
       </section>
 
       {/* BLOCO 11: BLOCO DE OFERTA */}
-      <section id="oferta" className="py-20" style={{ backgroundColor: "#FF6B00" }}>
+      <section id="oferta" className="py-20 reveal" style={{ backgroundColor: "#FF6B00" }}>
         <div className="mx-auto max-w-3xl px-5">
-          <div className="fade-in-up">
+          <div>
             <div className="rounded-[2.5rem] bg-white p-8 sm:p-14 shadow-2xl">
               <div className="text-center mb-10">
                 <h2 className="text-3xl sm:text-4xl font-black text-black leading-tight">Tudo o Que Você Vai Receber Hoje</h2>
@@ -635,9 +644,9 @@ export default function Home() {
       </section>
 
       {/* BLOCO 12: Guarantee */}
-      <section className="bg-white py-20 border-t border-gray-100">
+      <section className="bg-white py-20 border-t border-gray-100 reveal">
         <div className="mx-auto max-w-3xl px-5 text-center">
-          <div className="fade-in-up">
+          <div>
             <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-3xl bg-primary/10 mb-8">
               <ShieldCheck className="h-12 w-12 text-primary" />
             </div>
@@ -650,12 +659,12 @@ export default function Home() {
       </section>
 
       {/* BLOCO 13: FAQ */}
-      <section className="py-20" style={{ backgroundColor: "#F9F9F9" }}>
+      <section className="py-20 reveal" style={{ backgroundColor: "#F9F9F9" }}>
         <div className="mx-auto max-w-3xl px-5">
-          <div className="fade-in-up text-center mb-12">
+          <div className="text-center mb-12">
             <h2 className="text-3xl sm:text-4xl font-black text-black leading-tight">Perguntas Frequentes</h2>
           </div>
-          <div className="fade-in-up">
+          <div>
             <Accordion type="single" collapsible className="space-y-4">
               {[
                 { q: "Preciso de conhecimento prévio em elétrica?", a: "Não. O guia começa pelos fundamentos básicos e explica tudo em linguagem simples para quem está começando agora." },
@@ -680,9 +689,9 @@ export default function Home() {
       </section>
 
       {/* BLOCO 14: Final CTA */}
-      <section className="py-24" style={{ backgroundColor: "#0A0A0A" }}>
+      <section className="py-24 reveal" style={{ backgroundColor: "#0A0A0A" }}>
         <div className="mx-auto max-w-4xl px-5 text-center">
-          <div className="fade-in-up">
+          <div>
             <h2 className="text-3xl sm:text-5xl font-black text-white leading-tight">O Mercado Continua Crescendo</h2>
             <div className="mt-8 space-y-6 text-lg sm:text-xl text-gray-300 leading-relaxed font-medium">
               <p>Enquanto você pensa, novos sistemas continuam sendo instalados todos os dias.</p>
@@ -702,7 +711,7 @@ export default function Home() {
         </div>
       </section>
 
-      <footer className="py-10 border-t border-white/5" style={{ backgroundColor: "#0A0A0A" }}>
+      <footer className="py-10 border-t border-white/5 reveal" style={{ backgroundColor: "#0A0A0A" }}>
         <div className="mx-auto max-w-6xl px-5 text-center text-xs text-gray-500 font-medium">
           <p>© 2025 Guia do Instalador Solar. Todos os direitos reservados.</p>
         </div>
