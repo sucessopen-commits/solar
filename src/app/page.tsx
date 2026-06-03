@@ -86,7 +86,7 @@ export default function Home() {
                 <span style={{ color: "#FF6B00" }}>Mercados que Mais Crescem</span> no Brasil
               </h1>
               <p className="mt-6 text-lg sm:text-xl text-gray-300 leading-relaxed max-w-xl">
-                Aprenda a dimensionar, entender e instalar sistemas fotovoltaicos através de um guia prático e organizado, mesmo que você nunca tenha trabalhado com energia solar antes.
+                Mais de 4 mil homens já usaram este guia para dar os primeiros passos no mercado solar, aprendendo de forma prática como entender, dimensionar e instalar sistemas fotovoltaicos.
               </p>
               
               {/* Imagem Mobile (Visível apenas entre P e CTA no mobile) */}
