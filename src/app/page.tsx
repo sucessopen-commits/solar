@@ -82,8 +82,8 @@ export default function Home() {
             {/* Texto e Conteúdo Principal */}
             <div className="fade-in-up flex flex-col">
               <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black leading-[1.1] tracking-tight text-white">
-                Aprenda Energia Solar do Zero e Entenda Como Funciona um dos{" "}
-                <span style={{ color: "#FF6B00" }}>Mercados que Mais Crescem</span> no Brasil
+                Venha ingressar em um dos{" "}
+                <span style={{ color: "#FF6B00" }}>mercados que mais crescem</span> no Brasil
               </h1>
               <p className="mt-6 text-lg sm:text-xl text-gray-300 leading-relaxed max-w-xl">
                 Mais de 4 mil homens já usaram este guia para dar os primeiros passos no mercado solar, aprendendo de forma prática como entender, dimensionar e instalar sistemas fotovoltaicos.
