@@ -1,4 +1,3 @@
-
 import Image from "next/image";
 import { 
   Lock, 
@@ -32,10 +31,20 @@ import {
 } from "lucide-react";
 import { RoiCalculator } from "@/components/roi-calculator";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import { PlaceHolderImages } from "@/lib/placeholder-images";
 
 export default function Home() {
   const getImg = (id: string) => PlaceHolderImages.find(img => img.id === id);
+
+  const comparisonData = [
+    { label: "Conteúdo organizado e estruturado", v1: true, v2: true, v3: false },
+    { label: "Foco em aplicação real", v1: true, v2: false, v3: false },
+    { label: "Cálculos sem fórmulas complexas", v1: true, v2: false, v3: true },
+    { label: "Suporte e atualizações", v1: true, v2: true, v3: false },
+    { label: "Investimento acessível", v1: true, v2: false, v3: true },
+    { label: "Acesso Vitalício", v1: true, v2: false, v3: false }
+  ];
 
   return (
     <main className="min-h-screen font-body selection:bg-primary selection:text-white" style={{ backgroundColor: "#0A0A0A", color: "#fff" }}>
@@ -411,7 +420,9 @@ export default function Home() {
           <div className="fade-in-up text-center mb-12">
             <h2 className="text-3xl sm:text-4xl font-black text-black leading-tight">O Que Torna Este Guia Diferente</h2>
           </div>
-          <div className="fade-in-up overflow-x-auto rounded-3xl border border-gray-100 shadow-2xl">
+          
+          {/* Tabela Desktop */}
+          <div className="hidden sm:block fade-in-up overflow-x-auto rounded-3xl border border-gray-100 shadow-2xl">
             <table className="w-full min-w-[550px] text-center border-collapse overflow-hidden">
               <thead>
                 <tr className="bg-gray-50 text-black">
@@ -422,34 +433,50 @@ export default function Home() {
                 </tr>
               </thead>
               <tbody className="text-gray-800">
-                {[
-                  ["Conteúdo organizado e estruturado", true, true, false],
-                  ["Foco em aplicação real", true, false, false],
-                  ["Cálculos sem fórmulas complexas", true, false, true],
-                  ["Suporte e atualizações", true, true, false],
-                  ["Investimento acessível", true, false, true],
-                  ["Acesso Vitalício", true, false, false]
-                ].map(([label, v1, v2, v3], i) => (
+                {comparisonData.map((item, i) => (
                   <tr key={i} className="border-t border-gray-100 transition-colors hover:bg-gray-50/50">
-                    <td className="p-5 text-left font-semibold text-gray-700">{label as string}</td>
+                    <td className="p-5 text-left font-semibold text-gray-700">{item.label}</td>
                     <td className="p-5" style={{ backgroundColor: "rgba(255,107,0,0.03)" }}>
-                      {v1 ? <CircleCheck className="mx-auto h-7 w-7" style={{ color: "#FF6B00" }} /> : <CircleX className="mx-auto h-7 w-7 text-red-500" />}
+                      {item.v1 ? <CircleCheck className="mx-auto h-7 w-7" style={{ color: "#FF6B00" }} /> : <CircleX className="mx-auto h-7 w-7 text-red-500" />}
                     </td>
                     <td className="p-5">
-                      {v2 ? <CircleCheck className="mx-auto h-7 w-7" style={{ color: "#FF6B00" }} /> : <CircleX className="mx-auto h-7 w-7 text-gray-300" />}
+                      {item.v2 ? <CircleCheck className="mx-auto h-7 w-7" style={{ color: "#FF6B00" }} /> : <CircleX className="mx-auto h-7 w-7 text-gray-300" />}
                     </td>
                     <td className="p-5">
-                      {v3 ? <CircleCheck className="mx-auto h-7 w-7" style={{ color: "#FF6B00" }} /> : <CircleX className="mx-auto h-7 w-7 text-gray-300" />}
+                      {item.v3 ? <CircleCheck className="mx-auto h-7 w-7" style={{ color: "#FF6B00" }} /> : <CircleX className="mx-auto h-7 w-7 text-gray-300" />}
                     </td>
                   </tr>
                 ))}
               </tbody>
             </table>
           </div>
+
+          {/* Cards Mobile */}
+          <div className="sm:hidden space-y-4">
+            {comparisonData.map((item, i) => (
+              <div key={i} className="rounded-2xl border border-gray-100 bg-white p-6 shadow-sm">
+                <h4 className="text-base font-bold text-black mb-4 border-b border-gray-50 pb-2">{item.label}</h4>
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between text-sm">
+                    <span className="font-bold text-primary">📗 Guia Solar</span>
+                    {item.v1 ? <CircleCheck className="h-5 w-5 text-primary" /> : <CircleX className="h-5 w-5 text-red-500" />}
+                  </div>
+                  <div className="flex items-center justify-between text-sm opacity-60">
+                    <span className="font-medium text-gray-600">🏫 Curso Técnico</span>
+                    {item.v2 ? <CircleCheck className="h-5 w-5 text-primary" /> : <CircleX className="h-5 w-5 text-gray-300" />}
+                  </div>
+                  <div className="flex items-center justify-between text-sm opacity-60">
+                    <span className="font-medium text-gray-600">📺 YouTube</span>
+                    {item.v3 ? <CircleCheck className="h-5 w-5 text-primary" /> : <CircleX className="h-5 w-5 text-gray-300" />}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
-      {/* ROI Tool */}
+      {/* Simulador Tool */}
       <section className="py-20" style={{ backgroundColor: "#0A0A0A" }}>
         <RoiCalculator />
       </section>
@@ -465,37 +492,50 @@ export default function Home() {
               Quem Aplicou Já Está <span className="text-primary">Colhendo Resultado</span>
             </h2>
           </div>
-          <div className="grid gap-8 md:grid-cols-3">
-            {[
-              { name: "Carlos M.", sub: "Eletricista", img: 'testimonial-carlos', text: "O guia me ajudou a entender a lógica por trás da instalação. Hoje faço serviços solares com muito mais segurança." },
-              { name: "Rafael T.", sub: "Autônomo", img: 'testimonial-rafael', text: "Material direto ao ponto. Consegui fazer minha primeira instalação seguindo o passo a passo do guia." },
-              { name: "Priscila R.", sub: "Estudante", img: 'testimonial-priscila', text: "Excelente para quem está começando. A didática é muito simples e facilita o aprendizado de temas técnicos." }
-            ].map((t, i) => (
-              <div key={i} className="fade-in-up">
-                <div className="flex h-full flex-col overflow-hidden rounded-3xl bg-white shadow-xl ring-1 ring-black/5 transition-transform hover:-translate-y-2">
-                  <div className="relative bg-black h-[400px] overflow-hidden">
-                    <Image 
-                      src={getImg(t.img)?.imageUrl || ""} 
-                      alt={`Depoimento ${t.name}`} 
-                      fill 
-                      className="object-cover object-top opacity-90"
-                      data-ai-hint="whatsapp chat"
-                    />
-                  </div>
-                  <div className="p-8">
-                    <div className="flex items-center justify-between mb-4">
-                      <div>
-                        <div className="text-lg font-black text-black">{t.name}</div>
-                        <div className="text-xs font-bold text-gray-500 uppercase">{t.sub}</div>
+          
+          <Carousel className="w-full" opts={{ align: "start", loop: true }}>
+            <CarouselContent>
+              {[
+                { name: "Carlos M.", sub: "Eletricista", img: 'testimonial-carlos', text: "O guia me ajudou a entender a lógica por trás da instalação. Hoje faço serviços solares com muito mais segurança." },
+                { name: "Rafael T.", sub: "Autônomo", img: 'testimonial-rafael', text: "Material direto ao ponto. Consegui fazer minha primeira instalação seguindo o passo a passo do guia." },
+                { name: "Priscila R.", sub: "Estudante", img: 'testimonial-priscila', text: "Excelente para quem está começando. A didática é muito simples e facilita o aprendizado de temas técnicos." }
+              ].map((t, i) => (
+                <CarouselItem key={i} className="md:basis-1/2 lg:basis-1/3">
+                  <div className="p-2">
+                    <div className="flex h-full flex-col overflow-hidden rounded-3xl bg-white shadow-xl ring-1 ring-black/5 transition-transform">
+                      <div className="relative bg-black h-[350px] overflow-hidden">
+                        <Image 
+                          src={getImg(t.img)?.imageUrl || ""} 
+                          alt={`Depoimento ${t.name}`} 
+                          fill 
+                          className="object-cover object-top opacity-90"
+                          data-ai-hint="whatsapp chat"
+                        />
                       </div>
-                      <CircleCheck className="h-6 w-6 text-green-500" />
+                      <div className="p-8">
+                        <div className="flex items-center justify-between mb-4">
+                          <div>
+                            <div className="text-lg font-black text-black">{t.name}</div>
+                            <div className="text-xs font-bold text-gray-500 uppercase">{t.sub}</div>
+                          </div>
+                          <CircleCheck className="h-6 w-6 text-green-500" />
+                        </div>
+                        <p className="text-gray-700 italic leading-relaxed">"{t.text}"</p>
+                      </div>
                     </div>
-                    <p className="text-gray-700 italic leading-relaxed">"{t.text}"</p>
                   </div>
-                </div>
-              </div>
-            ))}
-          </div>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            <div className="hidden md:block">
+              <CarouselPrevious className="-left-12 border-primary text-primary hover:bg-primary hover:text-white" />
+              <CarouselNext className="-right-12 border-primary text-primary hover:bg-primary hover:text-white" />
+            </div>
+            <div className="flex justify-center gap-2 mt-8 md:hidden">
+              <CarouselPrevious className="static translate-y-0 border-primary text-primary" />
+              <CarouselNext className="static translate-y-0 border-primary text-primary" />
+            </div>
+          </Carousel>
         </div>
       </section>
 

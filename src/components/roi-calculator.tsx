@@ -1,133 +1,123 @@
 "use client";
 
 import { useState } from "react";
-import { calculatePersonalizedRoi, type PersonalizedRoiOutput } from "@/ai/flows/roi-calculator-flow";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
-import { Calculator, Zap, TrendingUp, DollarSign, Loader2 } from "lucide-react";
+import { Calculator, Zap, TrendingUp, DollarSign, Minus, Plus, AlertCircle } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 
 export function RoiCalculator() {
-  const [target, setTarget] = useState<number>(4);
-  const [loading, setLoading] = useState(false);
-  const [result, setResult] = useState<PersonalizedRoiOutput | null>(null);
+  const [projects, setProjects] = useState<number>(4);
 
-  const handleCalculate = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setLoading(true);
-    try {
-      const data = await calculatePersonalizedRoi({ monthlyInstallationsTarget: target });
-      setResult(data);
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setLoading(false);
-    }
-  };
+  // Constantes para cálculos educativos
+  const REVENUE_PER_PROJECT = 1200;
+  const COST_PER_PROJECT = 350;
+  const NET_PER_PROJECT = 850;
+
+  const grossRevenue = projects * REVENUE_PER_PROJECT;
+  const estimatedCosts = projects * COST_PER_PROJECT;
+  const netResult = projects * NET_PER_PROJECT;
+
+  const increment = () => setProjects((prev) => Math.min(prev + 1, 32));
+  const decrement = () => setProjects((prev) => Math.max(prev - 1, 1));
 
   return (
     <div className="w-full max-w-4xl mx-auto py-12 px-5">
       <Card className="border-2 border-primary/20 bg-card shadow-2xl overflow-hidden">
         <CardHeader className="text-center bg-primary/5 pb-8">
           <Badge variant="outline" className="w-fit mx-auto mb-4 border-primary text-primary font-bold">
-            FERRAMENTA EXCLUSIVA
+            FERRAMENTA DE PLANEJAMENTO
           </Badge>
           <CardTitle className="text-2xl sm:text-3xl font-black text-foreground">
-            Calculadora de <span className="text-primary">Potencial de Lucro</span>
+            Simulador de <span className="text-primary">Potencial de Projetos</span>
           </CardTitle>
           <CardDescription className="text-muted-foreground text-base max-w-lg mx-auto">
-            Descubra quanto você pode faturar no mercado solar investindo apenas R$19,90 no nosso guia.
+            Veja uma estimativa educativa de como a quantidade de projetos pode impactar o potencial de receita no mercado solar.
           </CardDescription>
         </CardHeader>
         <CardContent className="p-6 sm:p-10">
-          <form onSubmit={handleCalculate} className="grid gap-8 md:grid-cols-2 items-start">
-            <div className="space-y-6">
-              <div className="space-y-2">
-                <Label htmlFor="target" className="text-lg font-bold flex items-center gap-2">
+          <div className="grid gap-10 md:grid-cols-2 items-start">
+            <div className="space-y-8">
+              <div className="space-y-4">
+                <Label className="text-lg font-bold flex items-center gap-2">
                   <TrendingUp className="w-5 h-5 text-primary" />
-                  Meta de Instalações Mensais
+                  Projetos por mês
                 </Label>
-                <div className="flex gap-4">
-                  <Input
-                    id="target"
-                    type="number"
-                    min={1}
-                    max={50}
-                    value={target}
-                    onChange={(e) => setTarget(parseInt(e.target.value) || 1)}
-                    className="text-xl font-bold h-12"
-                  />
+                
+                <div className="flex items-center gap-4 bg-muted/50 p-2 rounded-2xl border border-input">
                   <Button 
-                    disabled={loading} 
-                    type="submit" 
-                    className="h-12 px-8 text-lg font-black bg-primary hover:bg-primary/90 transition-all cta-pulse"
+                    variant="outline" 
+                    size="icon" 
+                    onClick={decrement}
+                    disabled={projects <= 1}
+                    className="h-12 w-12 rounded-xl"
                   >
-                    {loading ? <Loader2 className="w-5 h-5 animate-spin" /> : "CALCULAR ROI"}
+                    <Minus className="h-6 w-6" />
+                  </Button>
+                  <div className="flex-1 text-center">
+                    <span className="text-3xl font-black text-primary">{projects}</span>
+                    <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-wider">Projetos</p>
+                  </div>
+                  <Button 
+                    variant="outline" 
+                    size="icon" 
+                    onClick={increment}
+                    disabled={projects >= 32}
+                    className="h-12 w-12 rounded-xl"
+                  >
+                    <Plus className="h-6 w-6" />
                   </Button>
                 </div>
-                <p className="text-sm text-muted-foreground">
-                  Dica: Um instalador iniciante costuma fazer de 2 a 4 instalações por mês.
+                
+                <p className="text-sm text-muted-foreground font-medium">
+                  Selecione uma quantidade entre 1 e 32 projetos mensais.
                 </p>
               </div>
 
-              <div className="p-4 rounded-xl bg-primary/5 border border-primary/10">
-                <h4 className="font-bold flex items-center gap-2 text-primary">
-                  <Zap className="w-4 h-4" /> Sabia que?
+              <div className="p-5 rounded-2xl bg-primary/5 border border-primary/10 space-y-3">
+                <h4 className="font-bold flex items-center gap-2 text-primary text-sm uppercase tracking-wide">
+                  <AlertCircle className="w-4 h-4" /> Nota importante
                 </h4>
-                <p className="text-sm mt-1 text-muted-foreground">
-                  O lucro médio por instalação residencial varia entre R$800 e R$2.000, dependendo da complexidade e tamanho do sistema.
+                <p className="text-xs leading-relaxed text-muted-foreground font-medium">
+                  Esta simulação é apenas uma referência. Os valores podem variar conforme região, complexidade do projeto, custos, experiência profissional, parcerias e forma de atuação.
                 </p>
               </div>
             </div>
 
-            <div className="relative">
-              {!result && !loading && (
-                <div className="h-full min-h-[300px] flex flex-col items-center justify-center text-center p-8 border-2 border-dashed border-muted rounded-2xl">
-                  <Calculator className="w-16 h-16 text-muted mb-4" />
-                  <p className="text-muted-foreground font-medium">Preencha sua meta ao lado para ver sua projeção financeira personalizada pela nossa IA.</p>
-                </div>
-              )}
-
-              {loading && (
-                <div className="h-full min-h-[300px] flex flex-col items-center justify-center space-y-4">
-                  <Loader2 className="w-12 h-12 animate-spin text-primary" />
-                  <p className="text-lg font-medium animate-pulse">Nossa IA está calculando sua projeção...</p>
-                </div>
-              )}
-
-              {result && !loading && (
-                <div className="space-y-6 fade-in-up">
-                  <div className="grid grid-cols-2 gap-4">
-                    <div className="p-4 rounded-xl bg-primary/10 border border-primary/20 text-center">
-                      <p className="text-xs font-bold text-muted-foreground uppercase tracking-wider">Lucro Mensal Mín.</p>
-                      <p className="text-2xl font-black text-primary">R$ {result.minMonthlyProfit.toLocaleString()}</p>
-                    </div>
-                    <div className="p-4 rounded-xl bg-primary/10 border border-primary/20 text-center">
-                      <p className="text-xs font-bold text-muted-foreground uppercase tracking-wider">Lucro Mensal Máx.</p>
-                      <p className="text-2xl font-black text-primary">R$ {result.maxMonthlyProfit.toLocaleString()}</p>
-                    </div>
+            <div className="space-y-6">
+              <div className="grid grid-cols-1 gap-4">
+                <div className="p-5 rounded-2xl bg-muted/30 border border-input">
+                  <div className="flex justify-between items-center mb-1">
+                    <p className="text-xs font-bold text-muted-foreground uppercase tracking-wider">Receita Bruta Estimada</p>
+                    <Zap className="h-4 w-4 text-primary opacity-50" />
                   </div>
+                  <p className="text-2xl font-black text-foreground">R$ {grossRevenue.toLocaleString()}</p>
+                </div>
 
-                  <div className="bg-foreground text-background p-6 rounded-2xl shadow-inner border border-white/10">
-                    <h4 className="font-black text-primary mb-3 flex items-center gap-2 uppercase tracking-wide">
-                      <DollarSign className="w-5 h-5" /> Análise de ROI
-                    </h4>
-                    <p className="text-sm sm:text-base leading-relaxed opacity-90 font-medium italic">
-                      "{result.roiAnalysis}"
-                    </p>
+                <div className="p-5 rounded-2xl bg-muted/30 border border-input">
+                  <div className="flex justify-between items-center mb-1">
+                    <p className="text-xs font-bold text-muted-foreground uppercase tracking-wider">Custos Operacionais Est.</p>
+                    <div className="h-1.5 w-8 rounded-full bg-red-500/20" />
                   </div>
+                  <p className="text-2xl font-black text-foreground">R$ {estimatedCosts.toLocaleString()}</p>
+                </div>
 
-                  <div className="text-center p-4 border border-green-500/30 bg-green-500/5 rounded-xl">
-                    <p className="text-sm font-bold text-green-600">
-                      ✅ O guia se paga com apenas {result.breakEvenInstallations} instalação!
+                <div className="p-6 rounded-2xl bg-foreground text-background shadow-xl border border-white/10 ring-4 ring-primary/10">
+                  <div className="flex justify-between items-center mb-1">
+                    <p className="text-xs font-bold text-primary uppercase tracking-widest">Resultado Líquido Est.</p>
+                    <DollarSign className="h-5 w-5 text-primary" />
+                  </div>
+                  <p className="text-4xl font-black text-white">R$ {netResult.toLocaleString()}</p>
+                  <div className="mt-4 pt-4 border-t border-white/10">
+                    <p className="text-[10px] leading-tight text-white/50 font-medium italic">
+                      Estimativa meramente educativa. Os resultados reais dependem da região, demanda, execução, custos, experiência e capacidade comercial de cada profissional.
                     </p>
                   </div>
                 </div>
-              )}
+              </div>
             </div>
-          </form>
+          </div>
         </CardContent>
       </Card>
     </div>
