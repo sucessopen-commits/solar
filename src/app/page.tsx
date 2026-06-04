@@ -1,3 +1,4 @@
+
 "use client";
 
 import Image from "next/image";
@@ -514,36 +515,28 @@ export default function Home() {
             <h2 className="text-3xl sm:text-5xl font-black text-black leading-tight">
               Quem Aplicou Já Está <span className="text-primary">Colhendo Resultado</span>
             </h2>
+            <p className="mt-4 text-gray-600 font-medium">Conversas reais de pessoas que aplicaram o conhecimento e começaram a gerar resultados com energia solar.</p>
           </div>
           
           <Carousel setApi={setApi} className="w-full" opts={{ align: "start", loop: true }}>
             <CarouselContent>
               {[
-                { name: "Carlos M.", sub: "Eletricista", img: 'testimonial-carlos', text: "O guia me ajudou a entender a lógica por trás da instalação. Hoje faço serviços solares com muito mais segurança." },
-                { name: "Rafael T.", sub: "Autônomo", img: 'testimonial-rafael', text: "Material direto ao ponto. Consegui fazer minha primeira instalação seguindo o passo a passo do guia." },
-                { name: "Priscila R.", sub: "Estudante", img: 'testimonial-priscila', text: "Excelente para quem está começando. A didática é muito simples e facilita o aprendizado de temas técnicos." }
+                { img: 'print-testimonial-1' },
+                { img: 'print-testimonial-2' },
+                { img: 'print-testimonial-3' },
+                { img: 'print-testimonial-4' }
               ].map((t, i) => (
                 <CarouselItem key={i} className="md:basis-1/2 lg:basis-1/3">
                   <div className="p-2">
-                    <div className="flex h-full flex-col overflow-hidden rounded-3xl bg-white shadow-xl ring-1 ring-black/5 transition-transform">
-                      <div className="relative bg-black h-[350px] overflow-hidden">
+                    <div className="flex flex-col overflow-hidden rounded-3xl bg-white shadow-lg border border-gray-100 transition-all">
+                      <div className="relative h-[500px] sm:h-[600px] w-full overflow-hidden bg-gray-50">
                         <Image 
                           src={getImg(t.img)?.imageUrl || ""} 
-                          alt={`Depoimento ${t.name}`} 
+                          alt={`Prova Social ${i + 1}`} 
                           fill 
-                          className="object-cover object-top opacity-90"
+                          className="object-contain"
                           data-ai-hint="whatsapp chat"
                         />
-                      </div>
-                      <div className="p-8">
-                        <div className="flex items-center justify-between mb-4">
-                          <div>
-                            <div className="text-lg font-black text-black">{t.name}</div>
-                            <div className="text-xs font-bold text-gray-500 uppercase">{t.sub}</div>
-                          </div>
-                          <CircleCheck className="h-6 w-6 text-green-500" />
-                        </div>
-                        <p className="text-gray-700 italic leading-relaxed">"{t.text}"</p>
                       </div>
                     </div>
                   </div>
@@ -552,7 +545,7 @@ export default function Home() {
             </CarouselContent>
             
             {/* Dots Indicadores */}
-            <div className="mt-8 flex justify-center gap-2">
+            <div className="mt-12 flex justify-center gap-2">
               {Array.from({ length: count }).map((_, index) => (
                 <button
                   key={index}
@@ -561,7 +554,7 @@ export default function Home() {
                     "h-3 w-3 rounded-full transition-all duration-300",
                     current === index ? "bg-primary w-8" : "bg-gray-300"
                   )}
-                  aria-label={`Ir para depoimento ${index + 1}`}
+                  aria-label={`Ir para prova social ${index + 1}`}
                 />
               ))}
             </div>

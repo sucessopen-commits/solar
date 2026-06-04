@@ -55,21 +55,27 @@
       "imageHint": "solar installation"
     },
     {
-      "id": "testimonial-carlos",
-      "description": "WhatsApp testimonial from Carlos",
-      "imageUrl": "https://picsum.photos/seed/test1/400/600",
+      "id": "print-testimonial-1",
+      "description": "WhatsApp chat testimonial 1",
+      "imageUrl": "https://i.postimg.cc/43BcZG0b/Chat-GPT-Image-4-de-jun-de-2026-17-58-33.png",
       "imageHint": "whatsapp chat"
     },
     {
-      "id": "testimonial-rafael",
-      "description": "WhatsApp testimonial from Rafael",
-      "imageUrl": "https://picsum.photos/seed/test2/400/600",
+      "id": "print-testimonial-2",
+      "description": "WhatsApp chat testimonial 2",
+      "imageUrl": "https://i.postimg.cc/jjZfKT16/Chat-GPT-Image-4-de-jun-de-2026-17-58-39.png",
       "imageHint": "whatsapp chat"
     },
     {
-      "id": "testimonial-priscila",
-      "description": "WhatsApp testimonial from Priscila",
-      "imageUrl": "https://picsum.photos/seed/test3/400/600",
+      "id": "print-testimonial-3",
+      "description": "WhatsApp chat testimonial 3",
+      "imageUrl": "https://i.postimg.cc/43BcZG0Q/Chat-GPT-Image-4-de-jun-de-2026-17-58-43.png",
+      "imageHint": "whatsapp chat"
+    },
+    {
+      "id": "print-testimonial-4",
+      "description": "WhatsApp chat testimonial 4",
+      "imageUrl": "https://i.postimg.cc/DzBGFhNX/mantem.jpg",
       "imageHint": "whatsapp chat"
     }
   ]
