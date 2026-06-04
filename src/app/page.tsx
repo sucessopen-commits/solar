@@ -110,16 +110,16 @@ export default function Home() {
           <div className="flex flex-col md:grid md:grid-cols-2 md:items-center gap-10">
             {/* Texto e Conteúdo Principal */}
             <div className="flex flex-col">
-              <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black leading-[1.1] tracking-tight text-white reveal" data-delay="0">
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black leading-[1.1] tracking-tight text-white reveal" data-delay="0">
                 Venha ingressar em um dos{" "}
                 <span style={{ color: "#FF6B00" }}>mercados que mais crescem</span> no Brasil
               </h1>
-              <p className="mt-6 text-lg sm:text-xl text-gray-300 leading-relaxed max-w-xl reveal" data-delay="150">
+              <p className="mt-4 sm:mt-6 text-lg sm:text-xl text-gray-300 leading-relaxed max-w-xl reveal" data-delay="150">
                 Mais de 4 mil homens já usaram este guia para dar os primeiros passos no mercado solar, aprendendo de forma prática como entender, dimensionar e instalar sistemas fotovoltaicos.
               </p>
               
               {/* Imagem Mobile */}
-              <div className="mt-8 md:hidden reveal" data-delay="250">
+              <div className="mt-6 md:hidden reveal" data-delay="250">
                 <div className="relative mx-auto max-w-[320px]">
                   <div className="absolute -inset-2 rounded-2xl opacity-10 blur-xl" style={{ backgroundColor: "#FF6B00" }}></div>
                   <Image 
@@ -127,13 +127,13 @@ export default function Home() {
                     alt="Instalação Solar" 
                     width={600} 
                     height={400}
-                    className="relative rounded-xl object-cover shadow-2xl h-48 w-full"
+                    className="relative rounded-xl object-cover shadow-2xl h-44 w-full"
                     data-ai-hint="solar installation"
                   />
                 </div>
               </div>
 
-              <div className="mt-8 sm:mt-10 reveal" data-delay="350">
+              <div className="mt-6 sm:mt-10 reveal" data-delay="350">
                 <a href="#oferta" className="inline-flex items-center justify-center gap-2 rounded-xl px-6 sm:px-10 py-5 text-base sm:text-xl font-extrabold text-white text-center uppercase tracking-wide transition-all duration-200 hover:scale-[1.03] hover:-translate-y-0.5 active:scale-100 w-full sm:w-auto cta-pulse" style={{ backgroundColor: "#FF6B00", boxShadow: "0 10px 30px -5px rgba(255, 107, 0, 0.5)" }}>
                   Quero começar agora
                 </a>
@@ -638,7 +638,7 @@ export default function Home() {
                   "🎁 Bônus: Guia de Instalação de Carregador de Carros Elétricos"
                 ].map((item, i) => (
                   <div key={i} className="flex items-center gap-3 py-2 border-b border-gray-50 last:border-0 reveal" data-delay={50 * i}>
-                    <CircleCheck className="h-5 w-5 flex-shrink-0 text-green-600" />
+                    {!item.startsWith("🎁") && <CircleCheck className="h-5 w-5 flex-shrink-0 text-green-600" />}
                     <span className="text-sm sm:text-base text-gray-800 font-semibold">{item}</span>
                   </div>
                 ))}
