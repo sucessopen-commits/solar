@@ -1,3 +1,4 @@
+
 'use server';
 /**
  * @fileOverview An AI-powered tool to calculate the potential return on investment (ROI) for a prospective solar installer.
@@ -36,12 +37,12 @@ const PersonalizedRoiOutputSchema = z.object({
   maxMonthlyProfit: z
     .number()
     .describe('The maximum potential monthly profit based on the target installations.'),
-  guideCost: z.number().describe('The cost of the guide (R$19.90).'),
+  guideCost: z.number().describe('The cost of the guide (R$20.87).'),
 });
 export type PersonalizedRoiOutput = z.infer<typeof PersonalizedRoiOutputSchema>;
 
 // --- Constants ---
-const GUIDE_COST = 19.90;
+const GUIDE_COST = 20.87;
 const MIN_PROFIT_PER_INSTALLATION = 800;
 const MAX_PROFIT_PER_INSTALLATION = 2000;
 

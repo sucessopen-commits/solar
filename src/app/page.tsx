@@ -1,3 +1,4 @@
+
 "use client";
 
 import Image from "next/image";
@@ -37,7 +38,7 @@ function SecondaryCtaButton({ className }: { className?: string }) {
         className="inline-flex items-center justify-center gap-2 rounded-2xl px-6 sm:px-10 py-5 text-base sm:text-lg font-black text-white text-center uppercase tracking-wide transition-all duration-200 hover:scale-[1.02] hover:-translate-y-1 active:scale-100 cta-pulse w-full sm:w-auto shadow-xl" 
         style={{ backgroundColor: "#FF6B00" }}
       >
-        ⚡ QUERO ACESSAR O GUIA AGORA — R$19,90
+        Quero começar agora
       </a>
     </div>
   );
@@ -134,7 +135,7 @@ export default function Home() {
 
               <div className="mt-8 sm:mt-10 reveal" data-delay="350">
                 <a href="#oferta" className="inline-flex items-center justify-center gap-2 rounded-xl px-6 sm:px-10 py-5 text-base sm:text-xl font-extrabold text-white text-center uppercase tracking-wide transition-all duration-200 hover:scale-[1.03] hover:-translate-y-0.5 active:scale-100 w-full sm:w-auto cta-pulse" style={{ backgroundColor: "#FF6B00", boxShadow: "0 10px 30px -5px rgba(255, 107, 0, 0.5)" }}>
-                  QUERO COMEÇAR AGORA
+                  Quero começar agora
                 </a>
               </div>
             </div>
@@ -588,11 +589,12 @@ export default function Home() {
             <span className="inline-block rounded-full px-4 py-1.5 text-xs font-black uppercase tracking-wider text-black bg-primary mb-5 reveal">Exclusivo para quem começar hoje</span>
             <h2 className="text-3xl sm:text-4xl font-black text-white leading-tight reveal" data-delay="150">Você também recebe esses bônus práticos:</h2>
           </div>
-          <div className="grid gap-6 md:grid-cols-3 text-left">
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4 text-left">
             {[
               { id: 1, title: "Limpeza de Painéis Solares", desc: "Aprenda a oferecer esse serviço de manutenção preventiva e gere renda recorrente.", price: "R$67,00" },
               { id: 2, title: "Contratos de Manutenção Solar", desc: "Como estruturar contratos fixos mensais com seus clientes para garantir estabilidade.", price: "R$19,90" },
-              { id: 3, title: "Checklist do Instalador", desc: "Uma lista completa de verificação para não esquecer nenhum detalhe técnico em campo.", price: "R$39,00" }
+              { id: 3, title: "Checklist do Instalador", desc: "Uma lista completa de verificação para não esquecer nenhum detalhe técnico em campo.", price: "R$39,00" },
+              { id: 4, title: "Instalação de Carregador EV", desc: "Aprenda os fundamentos para entender e instalar carregadores residenciais para veículos elétricos.", price: "R$89,00" }
             ].map((b, i) => (
               <div key={i} className="reveal" data-delay={100 * i}>
                 <div className="flex h-full flex-col rounded-3xl border-2 p-8 transition-all hover:border-primary/40 bg-[#1A1A1A]" style={{ borderColor: "rgba(255,107,0,0.2)" }}>
@@ -632,7 +634,8 @@ export default function Home() {
                   "Garantia Incondicional de 7 Dias",
                   "🎁 Bônus: Checklist de Instalação Profissional",
                   "🎁 Bônus: Guia de Limpeza de Painéis",
-                  "🎁 Bônus: Contratos de Manutenção"
+                  "🎁 Bônus: Contratos de Manutenção",
+                  "🎁 Bônus: Guia de Instalação de Carregador de Carros Elétricos"
                 ].map((item, i) => (
                   <div key={i} className="flex items-center gap-3 py-2 border-b border-gray-50 last:border-0 reveal" data-delay={50 * i}>
                     <CircleCheck className="h-5 w-5 flex-shrink-0 text-green-600" />
@@ -641,13 +644,19 @@ export default function Home() {
                 ))}
               </div>
               <div className="text-center bg-gray-50 rounded-3xl p-8 border border-gray-100 reveal" data-delay="300">
-                <div className="text-sm text-gray-400 font-bold uppercase tracking-widest mb-2">Investimento único de</div>
-                <div className="text-6xl sm:text-7xl font-black text-primary leading-none mb-4">R$19,90</div>
-                <div className="text-xs text-gray-500 font-bold">SEM MENSALIDADES • ACESSO IMEDIATO</div>
+                <div className="text-sm text-gray-400 font-bold uppercase tracking-widest mb-2">Investimento único</div>
+                <div className="flex flex-col items-center gap-1 mb-4">
+                  <span className="text-lg text-gray-400 line-through font-bold">De R$47,00</span>
+                  <div className="flex items-baseline gap-2">
+                    <span className="text-5xl sm:text-7xl font-black text-primary leading-none">R$20,87</span>
+                    <span className="bg-primary/10 text-primary text-xs font-black px-2 py-1 rounded-lg">57% OFF</span>
+                  </div>
+                </div>
+                <div className="text-xs text-gray-500 font-bold uppercase tracking-tighter">SEM MENSALIDADES • ACESSO IMEDIATO</div>
               </div>
               <div className="mt-8 reveal" data-delay="400">
                 <a href="https://pay.kiwify.com.br/FyBJS48" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 rounded-2xl px-6 sm:px-10 py-6 text-lg sm:text-2xl font-black text-white text-center uppercase tracking-wide transition-all duration-200 hover:scale-[1.02] hover:-translate-y-1 active:scale-100 cta-pulse w-full shadow-xl" style={{ backgroundColor: "#FF6B00" }}>
-                  QUERO COMEÇAR AGORA
+                  Quero começar agora
                 </a>
               </div>
             </div>
@@ -683,7 +692,7 @@ export default function Home() {
                 { q: "Como recebo o guia após o pagamento?", a: "O acesso é imediato. Assim que o pagamento é confirmado, você recebe os dados de acesso no seu e-mail cadastrado." },
                 { q: "O guia serve para quem quer apenas instalar em casa?", a: "Sim! Ele cobre toda a parte técnica de dimensionamento e montagem que serve tanto para profissionais quanto para projetos próprios." },
                 { q: "Terei acesso por quanto tempo?", a: "O acesso é vitalício. Você pode consultar o material sempre que precisar de uma ajuda em campo ou para novos cálculos." },
-                { q: "Os bônus estão incluídos no preço de R$19,90?", a: "Sim, todos os 3 bônus exclusivos são liberados automaticamente junto com o guia principal." },
+                { q: "Os bônus estão incluídos no preço de R$20,87?", a: "Sim, todos os bônus exclusivos são liberados automaticamente junto com o guia principal." },
                 { q: "O pagamento é seguro?", a: "Sim. Utilizamos uma das maiores plataformas de pagamentos digitais do Brasil, garantindo total segurança para seus dados." }
               ].map((faq, i) => (
                 <AccordionItem key={i} value={`item-${i}`} className="bg-white rounded-2xl border border-gray-100 px-6 shadow-sm overflow-hidden reveal" data-delay={80 * i}>
@@ -712,7 +721,7 @@ export default function Home() {
             </div>
             <div className="mt-12 reveal" data-delay="450">
               <a href="#oferta" className="inline-flex items-center justify-center gap-2 rounded-2xl px-8 sm:px-14 py-7 text-xl sm:text-2xl font-extrabold text-white text-center uppercase tracking-wide transition-all duration-200 hover:scale-[1.03] hover:-translate-y-1 active:scale-100 cta-pulse w-full sm:w-auto shadow-[0_15px_40px_-10px_rgba(255,107,0,0.6)]" style={{ backgroundColor: "#FF6B00" }}>
-                QUERO COMEÇAR AGORA
+                Quero começar agora
               </a>
             </div>
             <div className="mt-8 flex items-center justify-center gap-6 opacity-60 reveal" data-delay="600">
