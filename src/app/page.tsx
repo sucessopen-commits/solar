@@ -655,7 +655,7 @@ export default function Home() {
                 <div className="text-xs text-gray-500 font-bold uppercase tracking-tighter">SEM MENSALIDADES • ACESSO IMEDIATO</div>
               </div>
               <div className="mt-8 reveal" data-delay="400">
-                <a href="https://pay.kiwify.com.br/FyBJS48" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 rounded-2xl px-6 sm:px-10 py-6 text-lg sm:text-2xl font-black text-white text-center uppercase tracking-wide transition-all duration-200 hover:scale-[1.02] hover:-translate-y-1 active:scale-100 cta-pulse w-full shadow-xl" style={{ backgroundColor: "#FF6B00" }}>
+                <a href="https://pay.cakto.com.br/akofc2b_911846" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 rounded-2xl px-6 sm:px-10 py-6 text-lg sm:text-2xl font-black text-white text-center uppercase tracking-wide transition-all duration-200 hover:scale-[1.02] hover:-translate-y-1 active:scale-100 cta-pulse w-full shadow-xl" style={{ backgroundColor: "#FF6B00" }}>
                   Quero começar agora
                 </a>
               </div>
